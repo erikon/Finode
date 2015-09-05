@@ -23,7 +23,7 @@ $(function(){
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
-				getStocksByCategory(categories[i]);
+				//getStocksByCategory(categories[i]);
 			}
 		});
 	}
