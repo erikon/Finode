@@ -43,6 +43,8 @@ def get_sectors():
 
 @mod_api.route("/category/<string:sector>")
 def get_sector(sector):
+	if(sector == 'na'):
+		sector = 'n/a'
 	if(sector != 'null'):
 		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all())
 	else:

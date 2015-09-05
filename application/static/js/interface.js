@@ -19,7 +19,7 @@ $(function(){
 			}
 		
 			for(var i = 0; i < categories.length; i++){
-				if(categories[i] != null && categories[i] != 'n/a' && categories[i] != 'Sector'){
+				if(categories[i] != null && categories[i] != 'Sector' && categories[i] != 'n/a'){
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
@@ -28,9 +28,10 @@ $(function(){
 		});
 	}
 	getStocksByCategory = function(category){
+		if(category == 'n/a') category = 'na';
 		$.ajax({
 			url: '/api/category/'+category
-		}).done(function(data){	
+		}).done(function(data){
 			data = JSON.parse(data);	
 			sectorData[category] = data;
 			stockCount += data.length;
