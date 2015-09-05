@@ -1,0 +1,16 @@
+.display{
+    height: 500px;
+    width: 80%;
+    margin: auto;
+    border: 1px solid #000;
+    .mid-panel{
+        height: 100%;
+        .d3-container{
+            height: 100%;
+            border: 1px solid #000; 
+           .d3-panel{
+                width: 100%;
+            }
+        }
+    }
+}

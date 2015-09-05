@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 
 <html>
-
-	<style> /* set the CSS */
-
-		body { font: 12px Arial;}
-
-		path {
-		stroke: steelblue;
-		stroke-width: 2;
-		fill: none;
-		}
-
-		.axis path,
-		.axis line {
-		fill: none;
-		stroke: grey;
-		stroke-width: 1;
-		shape-rendering: crispEdges;
-		}
-
-</style>
-
 	<head>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -35,25 +14,22 @@
 		</script>
 
 		<title>stockR</title>
-
-
-
 	</head>
 
 	<body>
     	<h1 align="center">stockR</h1>
+    	<div class="display">
+				<div class="col-xs-2 available">
 
-    	<div class="container">
-    		<div class="row row-centered">
-	       		<div class="col-xs-6 col-centered search">
-	       			Search
-	       		</div>
-    	   		<div class="col-xs-6 col-centered visualization">	Visualization
-    	   		</div>
-    		</div>
-		</div>
-		<svg id="visualization" width="1000" height="500"></svg>
-
+				</div>
+				<div class="mid-panel col-xs-8">
+					<div class="d3-container">
+						<svg class="d3-panel">
+						</svg>
+					</div>
+				</div>
+				<div class="col-xs-2 active"></div>
+			</div>
     </body>
 
 </html>
