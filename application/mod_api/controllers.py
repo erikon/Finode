@@ -22,28 +22,38 @@ def getSesh():
 	session = Session()
 	return session
 
-def jsonify(query):
+def objectify(query):
 	res = []
 	for row in query:
 		temp = {k: str(v) for (k, v) in vars(row).items() if not k.startswith("_")}
 		res.append(temp)
-	return json.dumps(res)
+	return res
 
-@mod_api.route("/price/<string:symbol>")
 def get_by_symbol(symbol):
-	return jsonify(getSesh().query(Price).filter(Price.symbol == symbol).all())
+	return objectify(getSesh().query(Price).filter(Price.symbol == symbol).all())
+@mod_api.route("/price/<string:symbol>")
+def get_by_symbol_api(symbol):
+	return json.dumps(get_by_symbol(symbol))
 
-@mod_api.route("/company/<string:symbol>")
 def get_company_name(symbol):
-	return jsonify(getSesh().query(Symbol).filter(Symbol.symbol == symbol).all())
+	return objectify(getSesh().query(Symbol).filter(Symbol.symbol == symbol).all())
+@mod_api.route("/company/<string:symbol>")
+def get_company_name_api(symbol):
+	return json.dumps(get_company_name(symbol))
 
-@mod_api.route("/category/all")
 def get_sectors():
-	return json.dumps(getSesh().query(Symbol.sector).distinct().all())
+	return getSesh().query(Symbol.sector).distinct().all()
+@mod_api.route("/category/all")
+def get_sectors_api():
+	return json.dumps(get_sectors())
 
-@mod_api.route("/category/<string:sector>")
 def get_sector(sector):
+	if(sector == 'na'):
+		sector = 'n/a'
 	if(sector != 'null'):
-		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all())
+		return objectify(getSesh().query(Symbol).filter(Symbol.sector == sector).all())
 	else:
-		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == None).all())
+		return objectify(getSesh().query(Symbol).filter(Symbol.sector == None).all())
+@mod_api.route("/category/<string:sector>")
+def get_sector_api(sector):
+	return json.dumps(get_sector(sector));
