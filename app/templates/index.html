@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 
 <html>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<style> /* set the CSS */
 
+		body { font: 12px Arial;}
+
+		path {
+		stroke: steelblue;
+		stroke-width: 2;
+		fill: none;
+		}
+
+		.axis path,
+		.axis line {
+		fill: none;
+		stroke: grey;
+		stroke-width: 1;
+		shape-rendering: crispEdges;
+		}
+
+</style>
 
 	<head>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script type="text/javascript" src="static/js/visualize.js"></script>
+
+		</script>
+
 		<title>stockR</title>
+
+
+
 	</head>
 
 	<body>
@@ -24,6 +52,8 @@
     	   		</div>
     		</div>
 		</div>
+		<svg id="visualization" width="1000" height="500"></svg>
+
     </body>
 
 </html>
