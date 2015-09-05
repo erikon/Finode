@@ -31,7 +31,7 @@ def jsonify(query):
 
 @mod_api.route("/price/<string:symbol>")
 def get_by_symbol(symbol):
-	return jsonify(getSesh().query(Price).filter(Price.symbol == symbol).limit(100).all())
+	return jsonify(getSesh().query(Price).filter(Price.symbol == symbol).all())
 
 @mod_api.route("/company/<string:symbol>")
 def get_company_name(symbol):
