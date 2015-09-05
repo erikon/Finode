@@ -14,7 +14,7 @@ Base = declarative_base()
 class Price(Base):
 	__tablename__ = "price"
 	symbol = Column(String(10), primary_key=True)
-	date_ex = Column(Date)
+	date_ex = Column(Date, primary_key=True)
 	open_p = Column(Numeric)
 	high_p = Column(Numeric)
 	low_p = Column(Numeric)
