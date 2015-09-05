@@ -30,8 +30,16 @@ def get_by_symbol(symbol):
 		res.append(temp)
 	return json.dumps(res)
 
+@mod_api.route("/<string:symbol>/company", methods=["GET"])
 def get_company_name(symbol):
 	print(symbol)
-	engine = create_engine("mysql+pymysql://root:Johny224Seeds!@45.79.181.223:3306/stocks")
+	engine = create_engine("mysql+pymysql://root:Johny224Seeds!@45.79.181.233:3306/stocks")
 	Session = sessionmaker(bind=engine)
 	session = Session()
+
+	query = session.query(Symbol.company) \
+		.filter(Symbol.symbol == symbol) \
+		.group_by(Symbol.company).all()
+
+	return str(query)
+
