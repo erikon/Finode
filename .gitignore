@@ -1,4 +1,4 @@
 env/
 *.pyc
-style.css
-style.css.map
+app/static/css/style.css
+

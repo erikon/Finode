@@ -36,6 +36,7 @@ $(function(){
 			$('li[data-category="all"]').html('All (' + stockCount + ')');
 			var entry = $('li[data-category="'+category+'"]');
 			$(entry).html($(entry).html() + ' (' + data.length + ')');
+			loaded += 1;
 		});
 	}
 	bindActions = function(){
