@@ -10,3 +10,4 @@ def getSectors():
     sectors = json.load(data);
     return render_template('index.html',
                             sectors = sectors);
+getSectors();
