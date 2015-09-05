@@ -7,7 +7,7 @@ mod_game = Blueprint('game', __name__, url_prefix='/game')
 
 def getSectors():
     data = get_sectors();
-    sectors = json.loads(data);
+    # sectors = json.loads(data);
     return render_template('index.html',
-                            sectors = sectors);
+                            data = sectors);
 getSectors();
