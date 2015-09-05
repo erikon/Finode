@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="static/css/style.css">
 
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 
 		<title>stockR</title>
@@ -17,10 +17,17 @@
 	<body>
     	<h1 align="center">stockR</h1>
     	<div class="display">
-				<div class="col-xs-2 available">
+				<div class="col-xs-3 available">
+					<div class="categories">
+						<ul class="list-unstyled">
+							<li data-category="all">All</li>
+						</ul>
+					</div>
+					<div class="stocks">
 
+					</div>
 				</div>
-				<div class="mid-panel col-xs-8">
+				<div class="mid-panel col-xs-7">
 					<div class="d3-container">
 						<svg class="d3-panel">
 						</svg>
@@ -30,6 +37,6 @@
 			</div>
     </body>
 
+		<script type="text/javascript" src="static/js/interface.js"></script>
     <script type="text/javascript" src="static/js/visualize.js"></script>
-
 </html>
