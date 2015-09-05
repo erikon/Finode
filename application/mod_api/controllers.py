@@ -47,4 +47,3 @@ def get_sector(sector):
 		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all())
 	else:
 		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == None).all())
-
