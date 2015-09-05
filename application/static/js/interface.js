@@ -20,7 +20,7 @@ $(function(){
 		
 			for(var i = 0; i < categories.length; i++){
 				if(categories[i] != null && categories[i] != 'n/a' && categories[i] != 'Sector'){
-					$('ul', '.categories').papend('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
+					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
 				//getStocksByCategory(categories[i]);
