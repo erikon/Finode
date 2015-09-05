@@ -28,3 +28,17 @@
 
     }
 }
+
+path {
+    stroke: steelblue;
+    stroke-width: 1;
+fill: none;
+}
+.axis {
+    path, line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+}
