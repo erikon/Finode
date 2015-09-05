@@ -19,8 +19,8 @@ def get_by_symbol(symbol):
 	Session = sessionmaker(bind=engine)
 	session = Session()
 
-	query = session.query(models.Price) \
-		.filter(models.Price.symbol == symbol) \
+	query = session.query(Price) \
+		.filter(Price.symbol == symbol) \
 		.limit(100)
 	print(query);
 	res = []
