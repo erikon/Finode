@@ -19,7 +19,7 @@ $(function(){
 			}
 		
 			for(var i = 0; i < categories.length; i++){
-				if(categories[i] != null && categories[i] != 'n/a' && categories[i] != 'Sector'){static/js/interface.js
+				if(categories[i] != null && categories[i] != 'n/a' && categories[i] != 'Sector'){
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
