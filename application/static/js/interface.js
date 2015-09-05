@@ -23,7 +23,7 @@ $(function(){
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
-				//getStocksByCategory(categories[i]);
+				getStocksByCategory(categories[i]);
 			}
 		});
 	}
@@ -40,15 +40,15 @@ $(function(){
 			$(entry).html($(entry).html() + ' (' + data.length + ')');
 			$(entry).addClass('loaded');
 			$(entry).click(function(){
+				$('.category-entry').removeClass('active');
+				$(this).addClass('active');
 				var category = $(this).data('category');	
-				$('.category-display').html(category);
 			});
 		});
 	}
 	bindActions = function(){
 		$('.category-entry').click(function(){
-			var category = $(this).data('category');	
-			$('.category-display').html(category);
+			var category = $(this).data('category');
 		});
 	}
 	getCategories();
