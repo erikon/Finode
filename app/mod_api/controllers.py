@@ -14,32 +14,34 @@ from app.mod_api.models import *
 
 mod_api = Blueprint('api', __name__, url_prefix='/api')
 
-@mod_api.route("/<string:symbol>", methods=["GET"])
-def get_by_symbol(symbol):
-	print(symbol)
-	engine = create_engine("mysql+pymysql://root:Johny224Seeds!@45.79.181.233:3306/stocks")
+db_url = "mysql+pymysql://root:Johny224Seeds!@45.79.181.233:3306/stocks"
+
+def getSesh():
+	engine = create_engine(db_url)
 	Session = sessionmaker(bind=engine)
 	session = Session()
+	return session
 
-	query = session.query(Price) \
-		.filter(Price.symbol == symbol) \
-		.limit(100)
+def jsonify(query):
 	res = []
 	for row in query:
 		temp = {k: str(v) for (k, v) in vars(row).items() if not k.startswith("_")}
 		res.append(temp)
 	return json.dumps(res)
 
-@mod_api.route("/<string:symbol>/company", methods=["GET"])
+@mod_api.route("/price/<string:symbol>")
+def get_by_symbol(symbol):
+	return jsonify(getSesh().query(Price).filter(Price.symbol == symbol).limit(100).all())
+
+@mod_api.route("/company/<string:symbol>")
 def get_company_name(symbol):
-	print(symbol)
-	engine = create_engine("mysql+pymysql://root:Johny224Seeds!@45.79.181.233:3306/stocks")
-	Session = sessionmaker(bind=engine)
-	session = Session()
+	return jsonify(getSesh().query(Symbol).filter(Symbol.symbol == symbol).all())
 
-	query = session.query(Symbol.company) \
-		.filter(Symbol.symbol == symbol) \
-		.group_by(Symbol.company).all()
+@mod_api.route("/category/all")
+def get_sectors():
+	return json.dumps(getSesh().query(Symbol.sector).distinct().all());
 
-	return str(query)
-
+@mod_api.route("/category/<string:sector>")
+def get_sector(sector):
+	print(sector);
+	return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all());
