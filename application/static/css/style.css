@@ -1,0 +1,27 @@
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    font-size: 20pt;
+    padding: 3%;
+    background-color: #BFBFBF;
+    border-width: 5pt;
+    border-color: black;
+    border-style: solid;
+}
+.search {
+	background-color: #336E7B;
+	width: 20%;
+}
+.visualization{
+	background-color: #BFBFBF;
+	width: 60%;
+}
+#visualization{
+  padding-left: 100px;
+  padding-top: 50px;
+
+}

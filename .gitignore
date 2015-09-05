@@ -1,4 +1,6 @@
 env/
 *.pyc
-app/static/css/style.css
-
+application/static/css/style.css
+application/static/css/style.css.map
+.DS_Store
+.sass-cache/

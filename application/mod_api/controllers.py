@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 
 from sqlalchemy.pool import QueuePool
 
-from app.mod_api.models import *
+from application.mod_api.models import *
 
 mod_api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -31,7 +31,7 @@ def jsonify(query):
 
 @mod_api.route("/price/<string:symbol>")
 def get_by_symbol(symbol):
-	return jsonify(getSesh().query(Price).filter(Price.symbol == symbol).limit(100).all())
+	return jsonify(getSesh().query(Price).filter(Price.symbol == symbol).all())
 
 @mod_api.route("/company/<string:symbol>")
 def get_company_name(symbol):
@@ -47,3 +47,4 @@ def get_sector(sector):
 		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all())
 	else:
 		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == None).all())
+
