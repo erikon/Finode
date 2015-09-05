@@ -39,10 +39,11 @@ def get_company_name(symbol):
 
 @mod_api.route("/category/all")
 def get_sectors():
-	return json.dumps(getSesh().query(Symbol.sector).distinct().all());
+	return json.dumps(getSesh().query(Symbol.sector).distinct().all())
 
 @mod_api.route("/category/<string:sector>")
 def get_sector(sector):
-	print(sector);
-	if(sector != 'null') return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all());
-	else return jsonify(getSesh().query(Symbol).filter(Symbol.symbol == null).all());
+	if(sector != 'null'):
+		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all())
+	else:
+		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == None).all())
