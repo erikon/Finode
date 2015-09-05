@@ -1,2 +1,4 @@
 env/
 *.pyc
+app/static/css/style.css
+.DS_Store

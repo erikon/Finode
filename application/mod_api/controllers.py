@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 
 from sqlalchemy.pool import QueuePool
 
-from app.mod_api.models import *
+from application.mod_api.models import *
 
 mod_api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -44,4 +44,7 @@ def get_sectors():
 @mod_api.route("/category/<string:sector>")
 def get_sector(sector):
 	print(sector);
-	return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all());
+	if(sector != 'null'):
+		return jsonify(getSesh().query(Symbol).filter(Symbol.sector == sector).all());
+	else:
+		return jsonify(getSesh().query(Symbol).filter(Symbol.symbol == null).all());
