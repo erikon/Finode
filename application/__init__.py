@@ -14,7 +14,9 @@ def not_found(error):
 #Import modules
 from application.mod_api.controllers import mod_api as api_module
 from application.mod_web.controllers import mod_web as web_module
+from application.mod_game.controllers import mod_game as game_module
 
 #Register blueprints
 app.register_blueprint(api_module)
 app.register_blueprint(web_module)
+app.register_blueprint(game_module)
