@@ -1,8 +1,9 @@
 $(function() {
   var freeCash = 100000,
   portfolioValue = 0,
-  time = new Date (1995, 0, 1),
-  portfolio = {};
+  time = new Date(1995, 0, 1),
+  portfolio = {},
+  interval = new Date(1,0,0);
 
   function updateValue (length, symbol, quantity) {
     var total = data[symbol].close_p * quantity;
@@ -43,5 +44,9 @@ $(function() {
     }
     var cost = updateValue(length, symbol, quantity);
     freeCash += cost;
+  }
+
+  function updateTime (interval) {
+  	time.setDate(time+interval);
   }
 });
