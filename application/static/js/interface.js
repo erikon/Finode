@@ -65,7 +65,10 @@ $(function(){
 		});
 	}
 	getStock = function(symbol){
+		console.log(symbol);
 		if(stockData[symbol.toLowerCase()]){
+			console.log("cached");
+			console.log(stockData[symbol.toLowerCase()]);
 			return stockData[symbol.toLowerCase()];
 		}
 		$.ajax({
@@ -82,7 +85,6 @@ $(function(){
 			}
 			
 			stockData[symbol.toLowerCase()] = data;
-			return data;
 		});
 	}
 	compareStocks = function(a, b){
@@ -107,14 +109,13 @@ $(function(){
 		
 	}
 	addToGraph = function(stock){
-		generateGraph(getStock(stock));
+		generateGraph(new Array(getStock(stock)));
 	}
 	updateGraph = function(stock){
 		var data = [];
 		
 	}
 	filterStocks = function(category){
-		console.log(category);
 		$('.stock-entry', '.stocks').addClass('hide');
 		if(category != 'none') {
 			var categoryEntry = $('.category-entry[data-category="'+category+'"]');
