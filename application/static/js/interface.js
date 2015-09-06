@@ -21,6 +21,7 @@ $(function(){
 		
 			for(var i = 0; i < categories.length; i++){
 				if(categories[i] != null && categories[i] != 'Sector' && categories[i] != 'n/a'){
+					$('select', '.modal-body').append('<option>'+categories[i]+'</option>');
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
@@ -80,14 +81,14 @@ $(function(){
 				delete data[i].open_p;
 				delete data[i].symbol;
 			}
-			
+
 			stockData[symbol.toLowerCase()] = data;
 		});
 	}
 	compareStocks = function(a, b){
 		if(a.symbol < b.symbol){
 			return -1;
-		}		
+		}
 		if(a.symbol > b.symbol){
 			return 1;
 		}
@@ -96,7 +97,7 @@ $(function(){
 	toActive = function(stock){
 		var obj = $('.stock-entry[data-symbol="'+stock+'"]');
 		var activeObj = obj.clone(true);
-		$('.add-stock', activeObj).attr('onclick', 'addToGraph(\''+stock+'\')');	
+		$('.add-stock', activeObj).attr('onclick', 'addToGraph(\''+stock+'\')');
 		$(activeObj).append('<span class="remove-stock" onclick="removeFromActive(\''+stock+'\')">X</span>');
 		$('ul', '.active-stocks').append(activeObj);
 		$(obj).addClass('hide');
@@ -108,7 +109,7 @@ $(function(){
 	addToGraph = function(stock){
 		var obj = $(".stock-entry[data-symbol='"+stock+"']");
 		var circle = $('.add-stock', $(obj));
-	
+
 		if(circle.hasClass('selected')){
 			circle.removeClass('selected');
 		}
