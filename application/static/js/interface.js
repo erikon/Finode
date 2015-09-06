@@ -2,6 +2,7 @@ $(function(){
 	var categories = [],
 	stockData = {},
 	sectorData = {},
+	stockDataByDate = {},
 	stockCount = 0,
 	sectorCount = 0,
 	loadedCount = 0,
@@ -84,12 +85,15 @@ $(function(){
 		}).done(function(data){
 			data = JSON.parse(data);
 			console.log(data);
+			var key = symbol.toLowerCase();
+			stockDataByDate[key] = {};
 			for(var i = 0; i < data.length; i++){
 				delete data[i].adj_close_p;
 				delete data[i].high_p;
 				delete data[i].low_p;
 				delete data[i].open_p;
 				delete data[i].symbol;
+				stockDataByDate[key][data[i].date_ex] = data[i].close_p;
 			}
 			stockData[symbol.toLowerCase()] = data;
 			loadingStocks--;

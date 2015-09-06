@@ -3,10 +3,11 @@ var freeCash = 100000,
 portfolioValue = 0,
 time = new Date(1995, 0, 1),
 portfolio = {},
-interval = 1 // month
+interval = 1,
+currIndex = 0 // month
 
 function updateValue (length, symbol, quantity) {
-  var total = data[symbol].close_p * quantity;
+  var total = stockDataByDate[symbol.toLowerCase()][time.getFullYear()+'-'+time.getMonth()+'-'+time.getDate()] * quantity;
   if (Object.keys(portfolio).length > length) {
     portfolioValue += total;
   } else {
@@ -55,6 +56,7 @@ function sell (symbol, quantity) {
 
 function updateTime () {
   time.setMonth(time.getMonth() + interval);
+  
   $('.current-date').html(time.getMonth() + 1 + '/' + time.getDate() + '/' + time.getFullYear());
 }
 
