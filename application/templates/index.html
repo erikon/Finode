@@ -11,22 +11,24 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 
-		<title>stockR</title>
+		<title>finode</title>
 	</head>
 
 	<body>
-    	<h1 align="center">stockR</h1>
+    	<h1 align="center">finode</h1>
     	<div align="center">
     	 	<button id="play" type="button" class="btn btn-default" data-toggle="modal" data-target="#playModal">Play Game</button>
     	</div>
     	<div class="panel hide" id="collapse">
     		<div class="panel-body">
+          <div class="cash-output">Free Cash: </div>
     			<div class="btn-group" role="group" aria-label="...">
     				<button type="button" class="btn btn-default" onclick="buy()">Buy</button>
     				<button type="button" class="btn btn-default" onclick="sell()">Sell</button>
     			</div>
     			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#portfolioModal">View Portfolio</button>
-    			<button type="button" class="btn btn-default" onclick="updateTime()">Next Turn</button>
+    			<button type="button" class="btn btn-default">Next Turn</button>
+          <div class="time-output">Current Date: </div>
     		</div>
     	</div>
 

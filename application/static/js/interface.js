@@ -179,12 +179,6 @@ $(function(){
 			}
 		}
 	}
-	bindActions = function(){
-		$('.btn-start-game').click(function(){
-			$('div.panel').removeClass('hide');
-			$('#play').addClass('hide');	
-		});
-	}
+	
 	getCategories();
-	bindActions();
 });
