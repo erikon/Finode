@@ -25,21 +25,28 @@ $(function() {
 
   function buy (symbol, quantity) {
     var length = Object.keys(portfolio).length;
+    var cost = updateValue(length, symbol, quantity);
+    if(cost > freeCash){
+    	return -1;
+    }
     if(portfolio[symbol] == null){
       addPair(symbol, quantity);
     } else {
       portfolio[symbol] += quantity;
     }
-    var cost = updateValue(length, symbol, quantity);
     freeCash -= cost;
   }
 
   function sell (symbol, quantity) {
     var length = Object.keys(portfolio).length;
     var totalStock = getValue(symbol);
+    if(quantity > totalStock){
+    	return -1;
+    }
     if(quantity === totalStock){
         delete portfolio[symbol];
-    } else {
+    } 
+    else {
       portfolio[symbol] -= quantity;
     }
     var cost = updateValue(length, symbol, quantity);
