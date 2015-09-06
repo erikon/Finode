@@ -5,9 +5,10 @@ import json
 
 mod_game = Blueprint('game', __name__, url_prefix='/game')
 
+@mod_game.route("/")
 def getSectors():
-    data = get_sectors();
-    print data;
+    sec = get_sectors();
+    print index;
     return render_template('index.html',
-                            data = data);
-getSectors();
+                            sec = sec);
+

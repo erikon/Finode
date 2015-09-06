@@ -11,26 +11,33 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 
-		<script>
-			function toggleOverlay(){
-				var overlay = document.getElementById('overlay');
-				var specialBox = document.getElementById('specialBox');
-				overlay.style.opacity = .8;
-				if(overlay.style.display == "block"){
-					overlay.style.display = "none";
-					specialBox.style.display = "none";
-				} else {
-					overlay.style.display = "block";
-					specialBox.style.display = "block";
-				}
-			}
-		</script>
-
 		<title>stockR</title>
 	</head>
 
 	<body>
     	<h1 align="center">stockR</h1>
+    	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Play Game</button>
+    	<div id="myModal" class="modal fade" role="dialog">
+  			<div class="modal-dialog">
+			    <div class="modal-content">
+     				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title">Play stockR!</h4>
+      				</div>
+      				<div class="modal-body">
+      					<select>
+      						{% for sector in sec %}
+      						<option>{{ sector }}</option>
+      						{% endfor %}
+      					</select>
+        				<p>Instructions</p>
+					</div>
+      				<div class="modal-footer">
+        				<a href="game.html"><button type="button" class="btn btn-default">Play!</button></a>
+      				</div>
+      			</div>
+  			</div>
+		</div>
     	<div class="display">
 				<div class="left-panel col-xs-3 available">
 					<div class="categories">
