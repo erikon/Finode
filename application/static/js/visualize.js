@@ -1,3 +1,6 @@
+testHook = function(message){
+  console.log(message);
+}
 
 var StockGraph = function(height, width, margins, data) {
   this.height = height;

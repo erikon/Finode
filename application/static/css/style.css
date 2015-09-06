@@ -2,21 +2,27 @@
   height: 500px;
   width: 80%;
   margin: auto;
-  border: 1px solid #000; }
-.display .left-panel {
-  padding: 0; }
-.display .left-panel .stocks .category-display {
-  width: 100%;
-  height: 50px;
-  border: 1px solid #000; }
+  border: 1px solid #000;
+  margin-bottom: 100px; }
+.display .active {
+  font-weight: bold; }
 .display .mid-panel {
-  padding: 0;
+  margin-bottom: 50px;
   height: 100%; }
 .display .mid-panel .d3-container {
   height: 100%;
   border: 1px solid #000; }
 .display .mid-panel .d3-container .d3-panel {
   width: 100%; }
+.display .stocks, .display .active {
+  height: 300px;
+  text-align: right;
+  overflow-y: scroll; }
+.display .stocks .add-stock, .display .active .add-stock {
+  background-color: #ccc;
+  height: 12px;
+  width: 12px;
+  border-radius: 6px; }
 
 path {
   stroke: steelblue;

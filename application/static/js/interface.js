@@ -1,5 +1,6 @@
 $(function(){
 	var categories = [],
+	stockData = {},
 	sectorData = {},
 	stockCount = 0,
 	sectorCount = 0,
@@ -24,6 +25,19 @@ $(function(){
 				}
 				if(categories[i] == null) categories[i] = 'null';
 				getStocksByCategory(categories[i]);
+
+				$('.category-entry[data-category="'+categories[i]+'"]').click(function(){
+					if($(this).hasClass('active')){
+						$(this).removeClass('active');
+						filterStocks('none');
+					}
+					else{
+						$('.category-entry').removeClass('active');
+						$(this).addClass('active');
+						filterStocks($(this).data('category'));
+					}
+					var category = $(this).data('category');
+				});
 			}
 		});
 	}
@@ -32,25 +46,86 @@ $(function(){
 		$.ajax({
 			url: '/api/category/'+category
 		}).done(function(data){
-			data = JSON.parse(data);	
+			data = JSON.parse(data);
+
+			for(var i = 0; i < data.length; i++){
+				delete data[i].adrtso;
+				delete data[i].lastsale;
+				delete data[i].quotelink;
+			}
+
 			sectorData[category] = data;
 			stockCount += data.length;
 			$('li[data-category="all"]').html('All (' + stockCount + ')');
 			var entry = $('li[data-category="'+category+'"]');
 			$(entry).html($(entry).html() + ' (' + data.length + ')');
 			$(entry).addClass('loaded');
-			$(entry).click(function(){
-				$('.category-entry').removeClass('active');
-				$(this).addClass('active');
-				var category = $(this).data('category');	
-			});
+		}).fail(function(data){
+			console.log("In the fail section.");
 		});
 	}
-	bindActions = function(){
-		$('.category-entry').click(function(){
-			var category = $(this).data('category');
+	getStock = function(symbol){
+		$.ajax({
+			url: '/api/price/'+symbol
+		}).done(function(data){
+			data = JSON.parse(data);
+
+			for(var i = 0; i < data.length; i++){
+				delete data[i].adj_close_p;
+				delete data[i].high_p;
+				delete data[i].low_p;
+				delete data[i].open_p;
+				delete data[i].symbol;
+			}
+
+			stockData[symbol] = data;
+			return data;
 		});
 	}
+	compareStocks = function(a, b){
+		if(a.symbol < b.symbol){
+			return -1;
+		}		
+		if(a.symbol > b.symbol){
+			return 1;
+		}
+		return 0;
+	}
+	toActive = function(stock){
+		var obj = $('.stock-entry[data-symbol="'+stock+'"]');
+		var activeObj = obj.clone(true);
+		$('.add-stock', activeObj).attr('onclick', 'addToGraph(\''+stock+'\')');	
+		$('ul', '.active').append(activeObj);
+		$(obj).addClass('hide');
+	}
+	addToGraph = function(stock){
+		generateGraph([stockData[stock]]);
+	}
+	updateGraph = function(stock){
+		var data = [];
+		
+	}
+	filterStocks = function(category){
+		console.log(category);
+		$('.stock-entry').addClass('hide');
+		if(category != 'none') {
+			var categoryEntry = $('.category-entry[data-category="'+category+'"]');
+			if($(categoryEntry).hasClass('loaded')){
+				var stocks = sectorData[category];
+				stocks.sort(compareStocks);
+				for(var i = 0; i < stocks.length; i++){
+					var stock = stocks[i].symbol;
+					if(stock.indexOf('^') != -1) continue;
+					if($('li[data-symbol="'+stock+'"]').length == 0){
+						$('ul', '.stocks').append('<li class="stock-entry" data-symbol="'+stock+'">'+stock+'<div class="add-stock" onclick="toActive(\''+stock+'\')"></div></li>');
+					}
+					else {
+						$('li[data-symbol="'+stock+'"]').removeClass('hide');
+					}
+				}
+			}
+		}
+	}
+	getStock('aapl');
 	getCategories();
-	bindActions();
 });
