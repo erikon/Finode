@@ -1,3 +1,4 @@
+var colors = ['#202d80', '#e50000', '#f2c200', '#00331b', '#0081f2', '#d90000', '#79f299', '#330000', '#53a68a', '#8c2377', '#ee00ff', '#999173', '#669ccc', '#594316', '#ff80f6']
 
 var StockGraph = function(data) {
   this.height = d3.select(".d3-container").style("height").split("px").shift();
@@ -83,7 +84,7 @@ var StockGraph = function(data) {
   }
 }
 
-var generateGraph = function(data) {
+var generateGraph = function(data, colorData) {
   deleteGraph();
   var g = new StockGraph(data);
   g.draw();

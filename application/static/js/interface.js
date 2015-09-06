@@ -5,7 +5,10 @@ $(function(){
 	stockCount = 0,
 	sectorCount = 0,
 	loadedCount = 0,
-	loaded = {}
+	loaded = {},
+	currentVisible = 0,
+	stockColors = {},
+	loadingStocks = 0,
 
 	getCategories = function(){
 		$.ajax({
@@ -68,6 +71,7 @@ $(function(){
 		if(stockData[symbol.toLowerCase()]){
 			return stockData[symbol.toLowerCase()];
 		}
+		loadingStocks++;
 		$.ajax({
 			url: '/api/price/'+symbol
 		}).done(function(data){
@@ -81,6 +85,10 @@ $(function(){
 				delete data[i].symbol;
 			}
 			
+			loadingStocks--;
+			if(loadingStocks == 0){
+				drawGraph();
+			}
 			stockData[symbol.toLowerCase()] = data;
 		});
 	}
@@ -104,24 +112,34 @@ $(function(){
 	removeFromActive = function(stock){
 		$('.stock-entry[data-symbol="'+stock+'"]', '.active-stocks').remove();
 		$('.stock-entry[data-symbol="'+stock+'"]', '.stocks').removeClass('hide');
+		currentVisible -= 1;
 	}
 	addToGraph = function(stock){
-		var obj = $(".stock-entry[data-symbol='"+stock+"']");
+		var obj = $(".stock-entry[data-symbol='"+stock+"']", '.active-stocks');
 		var circle = $('.add-stock', $(obj));
 	
-		if(circle.hasClass('selected')){
-			circle.removeClass('selected');
+		if(obj.hasClass('selected')){
+			obj.removeClass('selected');
+			circle.removeClass('color'+stockColors[stock]);
+			currentVisible -= 1;
 		}
 		else{
-			circle.addClass('selected');
+			getStock(stock);
+			obj.addClass('selected');
+			currentVisible += 1;
+			currentVisible %= 15;
+			circle.addClass('color'+currentVisible);
+			stockColors[stock] = currentVisible;
 		}
 	}
-	updateGraph = function(stock){
-		var data = [];
+	drawGraph = function(){
+		var data = [], colors = [];
 		$('.stock-entry.selected', '.active-stocks').each(function(){
 			var stock = $(this).data('symbol');
 			data.push(stockData[stock]);
+			colors.push(stockColors[stock] - 1);
 		});
+		generateGraph(data, );
 	}
 	filterStocks = function(category){
 		$('.stock-entry', '.stocks').addClass('hide');
