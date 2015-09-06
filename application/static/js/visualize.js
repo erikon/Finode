@@ -1,7 +1,3 @@
-testHook = function(message){
-  console.log(message);
-}
-
 var StockGraph = function(height, width, margins, data) {
   this.margins = margins;
   this.height = d3.select(".d3-container").style("height").split("px").shift();

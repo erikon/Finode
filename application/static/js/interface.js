@@ -65,6 +65,9 @@ $(function(){
 		});
 	}
 	getStock = function(symbol){
+		if(stockData[symbol.toLowerCase()]){
+			return stockData[symbol.toLowerCase()];
+		}
 		$.ajax({
 			url: '/api/price/'+symbol
 		}).done(function(data){
@@ -77,8 +80,8 @@ $(function(){
 				delete data[i].open_p;
 				delete data[i].symbol;
 			}
-
-			stockData[symbol] = data;
+			
+			stockData[symbol.toLowerCase()] = data;
 			return data;
 		});
 	}
@@ -92,14 +95,19 @@ $(function(){
 		return 0;
 	}
 	toActive = function(stock){
+		getStock(stock);
 		var obj = $('.stock-entry[data-symbol="'+stock+'"]');
 		var activeObj = obj.clone(true);
 		$('.add-stock', activeObj).attr('onclick', 'addToGraph(\''+stock+'\')');	
-		$('ul', '.active').append(activeObj);
+		$(activeObj).append('<div class="remove-stock" onclick="removeFromActive(\''+stock+'\'"></div>');
+		$('ul', '.active-stocks').append(activeObj);
 		$(obj).addClass('hide');
 	}
+	removeFromActive = function(stock){
+		
+	}
 	addToGraph = function(stock){
-		generateGraph([stockData[stock]]);
+		generateGraph(getStock(stock));
 	}
 	updateGraph = function(stock){
 		var data = [];
@@ -107,7 +115,7 @@ $(function(){
 	}
 	filterStocks = function(category){
 		console.log(category);
-		$('.stock-entry').addClass('hide');
+		$('.stock-entry', '.stocks').addClass('hide');
 		if(category != 'none') {
 			var categoryEntry = $('.category-entry[data-category="'+category+'"]');
 			if($(categoryEntry).hasClass('loaded')){
@@ -126,6 +134,5 @@ $(function(){
 			}
 		}
 	}
-	getStock('aapl');
 	getCategories();
 });
