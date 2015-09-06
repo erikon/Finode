@@ -1,3 +1,4 @@
+
 var StockGraph = function(height, width, margins, data) {
   this.margins = margins;
   this.height = d3.select(".d3-container").style("height").split("px").shift();
@@ -81,4 +82,14 @@ var StockGraph = function(height, width, margins, data) {
         .attr("fill", "none");
     }
   }
+}
+
+var generateGraph = function(data) {
+  deleteGraph();
+  var g = new StockGraph(data);
+  g.draw();
+}
+
+var deleteGraph = function() {
+  $(".d3-panel").empty();
 }
