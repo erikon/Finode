@@ -189,6 +189,7 @@ $(function(){
 			var category = $('#sectors').val();
 			$('.add-category', '.category-entry[data-category="'+category+'"]').trigger('click');
 			inGame = true;
+			updateDisplay();
 		});
 	}
 	getCategories();

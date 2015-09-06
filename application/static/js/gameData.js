@@ -55,23 +55,22 @@ $(function() {
 
   function updateTime () {
   	time.setDate(time + interval);
+    $('.current-date').html(time.getMonth()+1+'/'+time.getDate()+'/'+time.getFullYear());
   }
 
-  function display (){
+  function updateDisplay (){
     console.log(freeCash);
     $('.cash-output').append(freeCash);
-    $('.time-output').append(time.getMonth()+1+'/'+time.getDate()+'/'+time.getFullYear());
+    $('.current-date').html(time.getMonth()+1+'/'+time.getDate()+'/'+time.getFullYear());
     // document.Write(freeCash);
     // document.Write(portfolioValue);
     // document.Write(time);
     // document.Write(interval);
   }
   bindActions = function(){
-    $('.btn-start-game').click(function(){
-      $('div.panel').removeClass('hide');
-      $('#play').addClass('hide'); 
-      display();
-    });
+      $('.btn-next-turn').click(function(){
+        
+      });
   }
 
   bindActions();
