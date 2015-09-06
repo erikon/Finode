@@ -25,22 +25,25 @@ $(function(){
 			for(var i = 0; i < categories.length; i++){
 				if(categories[i] != null && categories[i] != 'Sector' && categories[i] != 'n/a'){
 					$('select', '.modal-body').append('<option>'+categories[i]+'</option>');
-					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
+					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'"><span class="category-text">'+categories[i]+' <span class="category-count"></span></span><span class="add-category"></span></li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
 				getStocksByCategory(categories[i]);
 
-				$('.category-entry[data-category="'+categories[i]+'"]').click(function(){
-					if($(this).hasClass('active')){
-						$(this).removeClass('active');
+				$('.add-category', '.category-entry[data-category="'+categories[i]+'"]').click(function(){
+					var obj = $(this).closest('.category-entry');
+					if(obj.hasClass('active')){
+						obj.removeClass('active');
+						$(this).removeClass('selected');
 						filterStocks('none');
 					}
 					else{
 						$('.category-entry').removeClass('active');
-						$(this).addClass('active');
-						filterStocks($(this).data('category'));
+						obj.addClass('active');
+						$(this).addClass('selected');
+						filterStocks(obj.data('category'));
 					}
-					var category = $(this).data('category');
+					var category = obj.data('category');
 				});
 			}
 		});
@@ -62,7 +65,7 @@ $(function(){
 			stockCount += data.length;
 			$('li[data-category="all"]').html('All (' + stockCount + ')');
 			var entry = $('li[data-category="'+category+'"]');
-			$(entry).html($(entry).html() + ' (' + data.length + ')');
+			$('.category-count', entry).html('('+data.length+')');
 			$(entry).addClass('loaded');
 		}).fail(function(data){
 			console.log("In the fail section.");
@@ -122,6 +125,7 @@ $(function(){
 			obj.removeClass('selected');
 			circle.removeClass('color'+stockColors[stock]);
 			currentVisible -= 1;
+			removeFromGraph(colors[stockColors[stock]]);
 		}
 		else{
 			getStock(stock);
