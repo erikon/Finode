@@ -6,7 +6,7 @@ $(function(){
 	sectorCount = 0,
 	loadedCount = 0,
 	loaded = {},
-	currentVisible = 0,
+	colorCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	stockColors = {},
 	loadingStocks = 0,
 
@@ -115,7 +115,19 @@ $(function(){
 	removeFromActive = function(stock){
 		$('.stock-entry[data-symbol="'+stock+'"]', '.active-stocks').remove();
 		$('.stock-entry[data-symbol="'+stock+'"]', '.stocks').removeClass('hide');
-		currentVisible -= 1;
+		colorCount[stockColors[stock]]--;
+		drawGraph();
+	}
+	pickNextColor = function(){
+		var maxUses = 1<<30, loc = -1;
+		for(var i = 0; i < colors.length; i++){
+			if(colorCount[i] < maxUses){
+				maxUses = colorCount[i];
+				loc = i;
+			}
+		}
+		colorCount[loc]++;
+		return loc;
 	}
 	addToGraph = function(stock){
 		var obj = $(".stock-entry[data-symbol='"+stock+"']", '.active-stocks');
@@ -123,25 +135,26 @@ $(function(){
 
 		if(obj.hasClass('selected')){
 			obj.removeClass('selected');
+
 			circle.removeClass('color'+stockColors[stock]);
-			currentVisible -= 1;
-			removeFromGraph(colors[stockColors[stock]]);
+			colorCount[stockColors[stock]]--;
 		}
 		else{
 			getStock(stock);
 			obj.addClass('selected');
-			currentVisible += 1;
-			currentVisible %= 15;
-			circle.addClass('color'+currentVisible);
-			stockColors[stock] = currentVisible;
+
+			var nextColor = pickNextColor();
+			circle.addClass('color'+nextColor);
+			stockColors[stock] = nextColor;
 		}
+		drawGraph();
 	}
 	drawGraph = function(){
 		var data = [], colors = [];
 		$('.stock-entry.selected', '.active-stocks').each(function(){
 			var stock = $(this).data('symbol');
 			data.push(getStock(stock));
-			colors.push(stockColors[stock] - 1);
+			colors.push(stockColors[stock]);
 		});
 		console.log(data);
 		generateGraph(data, colors);
