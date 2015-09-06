@@ -9,6 +9,7 @@ $(function(){
 	colorCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	stockColors = {},
 	loadingStocks = 0,
+	inGame = false
 
 	getCategories = function(){
 		$.ajax({
@@ -24,26 +25,28 @@ $(function(){
 		
 			for(var i = 0; i < categories.length; i++){
 				if(categories[i] != null && categories[i] != 'Sector' && categories[i] != 'n/a'){
-					$('select', '.modal-body').append('<option>'+categories[i]+'</option>');
+					$('select', '.modal-body').append('<option value="'+categories[i]+'">'+categories[i]+'</option>');
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'"><span class="category-text">'+categories[i]+' <span class="category-count"></span></span><span class="add-category"></span></li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
 				getStocksByCategory(categories[i]);
 
 				$('.add-category', '.category-entry[data-category="'+categories[i]+'"]').click(function(){
-					var obj = $(this).closest('.category-entry');
-					if(obj.hasClass('active')){
-						obj.removeClass('active');
-						$(this).removeClass('selected');
-						filterStocks('none');
+					if(!inGame){
+						var obj = $(this).closest('.category-entry');
+						if(obj.hasClass('active')){
+							obj.removeClass('active');
+							$(this).removeClass('selected');
+							filterStocks('none');
+						}
+						else{
+							$('.category-entry').removeClass('active');
+							obj.addClass('active');
+							$(this).addClass('selected');
+							filterStocks(obj.data('category'));
+						}
+						var category = obj.data('category');
 					}
-					else{
-						$('.category-entry').removeClass('active');
-						obj.addClass('active');
-						$(this).addClass('selected');
-						filterStocks(obj.data('category'));
-					}
-					var category = obj.data('category');
 				});
 			}
 		});
@@ -179,5 +182,15 @@ $(function(){
 			}
 		}
 	}
+	bindActions = function(){
+		$('.btn-start-game').click(function(){
+			$('div.panel').removeClass('hide');
+			$('#play').addClass('hide');
+			var category = $('#sectors').val();
+			$('.add-category', '.category-entry[data-category="'+category+'"]').trigger('click');
+			inGame = true;
+		});
+	}
 	getCategories();
+	bindActions();
 });

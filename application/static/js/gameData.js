@@ -53,15 +53,27 @@ $(function() {
     freeCash += cost;
   }
 
-  function updateTime (interval) {
-  	time.setDate(time+interval);
+  function updateTime () {
+  	time.setDate(time + interval);
   }
 
   function display (){
-    document.Write(freeCash);
-    document.Write(portfolioValue);
-    document.Write(time);
-    document.Write(interval);
+    console.log(freeCash);
+    $('.cash-output').append(freeCash);
+    $('.time-output').append(time.getMonth()+1+'/'+time.getDate()+'/'+time.getFullYear());
+    // document.Write(freeCash);
+    // document.Write(portfolioValue);
+    // document.Write(time);
+    // document.Write(interval);
   }
+  bindActions = function(){
+    $('.btn-start-game').click(function(){
+      $('div.panel').removeClass('hide');
+      $('#play').addClass('hide'); 
+      display();
+    });
+  }
+
+  bindActions();
 
 });

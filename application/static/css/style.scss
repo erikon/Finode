@@ -140,3 +140,20 @@ path:hover {
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
+#collapse {
+    text-align: center;
+    margin: 0 auto;
+    width: 78%;
+    background-color: #ABB7B7;
+    color: #000000;
+    font-size: 14px;
+}
+#play{
+    margin-bottom: 5px;
+}
+.cash-output{
+    display: inline-block;
+}
+.time-output{
+    display: inline-block;
+}
