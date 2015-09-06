@@ -101,7 +101,7 @@ $(function(){
 		var obj = $('.stock-entry[data-symbol="'+stock+'"]');
 		var activeObj = obj.clone(true);
 		$('.add-stock', activeObj).attr('onclick', 'addToGraph(\''+stock+'\')');	
-		$(activeObj).append('<div class="remove-stock" onclick="removeFromActive(\''+stock+'\'"></div>');
+		$(activeObj).append('<span class="remove-stock" onclick="removeFromActive(\''+stock+'\'">X</span>');
 		$('ul', '.active-stocks').append(activeObj);
 		$(obj).addClass('hide');
 	}
@@ -126,7 +126,7 @@ $(function(){
 					var stock = stocks[i].symbol;
 					if(stock.indexOf('^') != -1) continue;
 					if($('li[data-symbol="'+stock+'"]').length == 0){
-						$('ul', '.stocks').append('<li class="stock-entry" data-symbol="'+stock+'">'+stock+'<div class="add-stock" onclick="toActive(\''+stock+'\')"></div></li>');
+						$('ul', '.stocks').append('<li class="stock-entry" data-symbol="'+stock+'"><span class="stock-symbol">'+stock+'</span><span class="add-stock" onclick="toActive(\''+stock+'\')"></span></li>');
 					}
 					else {
 						$('li[data-symbol="'+stock+'"]').removeClass('hide');
