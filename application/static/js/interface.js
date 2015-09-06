@@ -125,7 +125,7 @@ $(function(){
 			obj.removeClass('selected');
 			circle.removeClass('color'+stockColors[stock]);
 			currentVisible -= 1;
-			removeFromGraph(colors[stockColors[stock]]);
+			drawGraph();
 		}
 		else{
 			getStock(stock);
