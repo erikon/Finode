@@ -1,5 +1,20 @@
 var colors = ['#202d80', '#e50000', '#f2c200', '#00331b', '#0081f2', '#d90000', '#79f299', '#330000', '#53a68a', '#8c2377', '#ee00ff', '#999173', '#669ccc', '#594316', '#ff80f6']
 
+function hexToRgb(hex) {
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+      return r + r + g + g + b + b;
+  });
+
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+  } : null;
+}
+
 var StockGraph = function(data) {
   this.height = d3.select(".d3-container").style("height").split("px").shift();
   this.width = d3.select(".d3-container").style("width").split("px").shift();
@@ -37,13 +52,13 @@ var StockGraph = function(data) {
 
   console.log(this.minDate + " " + this.maxDate);
 
-  this.draw = function() {
+  this.draw = function(colorData) {
     var that = this;
     var vis = d3.select(".d3-panel")
         .attr("viewBox","0 0 " + this.width + " " + this.height)
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("preserveAspectRatio", "xMaxyMax meet"),
+        .attr("preserveAspectRatio", "xMaxyMax"),
       xRange = d3.time.scale()
         .range([0, this.width])
         .domain([this.minDate, this.maxDate]),
@@ -73,11 +88,14 @@ var StockGraph = function(data) {
       .call(yAxis);
 
     for (var x = 0; x < this.data.length; x++) {
+      rgb = hexToRgb(colors[colorData[x]])
+      console.log(rgb)
       var lineGen = d3.svg.line()
         .x(function (d) { return xRange(that.toDate(d.date_ex)); })
         .y(function (d) { return yRange(parseFloat(d.close_p)); })
       vis.append("path")
         .attr("d", lineGen(data[x]))
+        .attr("stroke", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")")
         .attr("stroke-width", 1)
         .attr("fill", "none");
     }
@@ -87,7 +105,7 @@ var StockGraph = function(data) {
 var generateGraph = function(data, colorData) {
   deleteGraph();
   var g = new StockGraph(data);
-  g.draw();
+  g.draw(colorData);
 }
 
 var deleteGraph = function() {

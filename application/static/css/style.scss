@@ -104,9 +104,12 @@ body {
 font: 12px Arial;
 }
 path {
-    stroke: steelblue;
     stroke-width: 1;
     fill: none;
+}
+
+path:hover {
+    stroke-width: 2;
 }
 .axis path,
 .axis line {

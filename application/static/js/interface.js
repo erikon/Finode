@@ -77,7 +77,7 @@ $(function(){
 			url: '/api/price/'+symbol
 		}).done(function(data){
 			data = JSON.parse(data);
-
+			console.log(data);
 			for(var i = 0; i < data.length; i++){
 				delete data[i].adj_close_p;
 				delete data[i].high_p;
@@ -85,12 +85,11 @@ $(function(){
 				delete data[i].open_p;
 				delete data[i].symbol;
 			}
-
+			stockData[symbol.toLowerCase()] = data;
 			loadingStocks--;
 			if(loadingStocks == 0){
 				drawGraph();
 			}
-			stockData[symbol.toLowerCase()] = data;
 		});
 	}
 	compareStocks = function(a, b){
@@ -137,10 +136,11 @@ $(function(){
 		var data = [], colors = [];
 		$('.stock-entry.selected', '.active-stocks').each(function(){
 			var stock = $(this).data('symbol');
-			data.push(stockData[stock]);
+			data.push(getStock(stock));
 			colors.push(stockColors[stock] - 1);
 		});
-		generateGraph(data, );
+		console.log(data);
+		generateGraph(data, colors);
 	}
 	filterStocks = function(category){
 		$('.stock-entry', '.stocks').addClass('hide');
