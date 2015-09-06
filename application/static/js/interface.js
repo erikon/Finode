@@ -65,10 +65,7 @@ $(function(){
 		});
 	}
 	getStock = function(symbol){
-		console.log(symbol);
 		if(stockData[symbol.toLowerCase()]){
-			console.log("cached");
-			console.log(stockData[symbol.toLowerCase()]);
 			return stockData[symbol.toLowerCase()];
 		}
 		$.ajax({
@@ -97,23 +94,34 @@ $(function(){
 		return 0;
 	}
 	toActive = function(stock){
-		getStock(stock);
 		var obj = $('.stock-entry[data-symbol="'+stock+'"]');
 		var activeObj = obj.clone(true);
 		$('.add-stock', activeObj).attr('onclick', 'addToGraph(\''+stock+'\')');	
-		$(activeObj).append('<span class="remove-stock" onclick="removeFromActive(\''+stock+'\'">X</span>');
+		$(activeObj).append('<span class="remove-stock" onclick="removeFromActive(\''+stock+'\')">X</span>');
 		$('ul', '.active-stocks').append(activeObj);
 		$(obj).addClass('hide');
 	}
 	removeFromActive = function(stock){
-		
+		$('.stock-entry[data-symbol="'+stock+'"]', '.active-stocks').remove();
+		$('.stock-entry[data-symbol="'+stock+'"]', '.stocks').removeClass('hide');
 	}
 	addToGraph = function(stock){
-		generateGraph(new Array(getStock(stock)));
+		var obj = $(".stock-entry[data-symbol='"+stock+"']");
+		var circle = $('.add-stock', $(obj));
+	
+		if(circle.hasClass('selected')){
+			circle.removeClass('selected');
+		}
+		else{
+			circle.addClass('selected');
+		}
 	}
 	updateGraph = function(stock){
 		var data = [];
-		
+		$('.stock-entry.selected', '.active-stocks').each(function(){
+			var stock = $(this).data('symbol');
+			data.push(stockData[stock]);
+		});
 	}
 	filterStocks = function(category){
 		$('.stock-entry', '.stocks').addClass('hide');
