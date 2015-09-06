@@ -20,6 +20,7 @@ $(function(){
 		
 			for(var i = 0; i < categories.length; i++){
 				if(categories[i] != null && categories[i] != 'n/a' && categories[i] != 'Sector'){
+					$('select', '.modal-body').append('<option>'+categories[i]+'</option>');
 					$('ul', '.categories').append('<li class="category-entry" data-category="'+categories[i]+'">'+categories[i]+'</li>');
 				}
 				if(categories[i] == null) categories[i] = 'null';
@@ -30,8 +31,8 @@ $(function(){
 	getStocksByCategory = function(category){
 		$.ajax({
 			url: '/api/category/'+category
-		}).done(function(data){	
-			data = JSON.parse(data);	
+		}).done(function(data){
+			data = JSON.parse(data);
 			sectorData[category] = data;
 			stockCount += data.length;
 			$('li[data-category="all"]').html('All (' + stockCount + ')');
@@ -39,14 +40,14 @@ $(function(){
 			$(entry).html($(entry).html() + ' (' + data.length + ')');
 			$(entry).addClass('loaded');
 			$(entry).click(function(){
-				var category = $(this).data('category');	
+				var category = $(this).data('category');
 				$('.category-display').html(category);
 			});
 		});
 	}
 	bindActions = function(){
 		$('.category-entry').click(function(){
-			var category = $(this).data('category');	
+			var category = $(this).data('category');
 			$('.category-display').html(category);
 		});
 	}
