@@ -115,7 +115,8 @@ $(function(){
 	removeFromActive = function(stock){
 		$('.stock-entry[data-symbol="'+stock+'"]', '.active-stocks').remove();
 		$('.stock-entry[data-symbol="'+stock+'"]', '.stocks').removeClass('hide');
-		currentVisible -= 1;
+		colorCount[stockColors[stock]]--;
+		drawGraph();
 	}
 	pickNextColor = function(){
 		var maxUses = 1<<30, loc = -1;
@@ -136,7 +137,7 @@ $(function(){
 			obj.removeClass('selected');
 
 			circle.removeClass('color'+stockColors[stock]);
-			removeFromGraph(colors[stockColors[stock]]);
+			colorCount[stockColors[stock]]--;
 		}
 		else{
 			getStock(stock);
@@ -146,13 +147,14 @@ $(function(){
 			circle.addClass('color'+nextColor);
 			stockColors[stock] = nextColor;
 		}
+		drawGraph();
 	}
 	drawGraph = function(){
 		var data = [], colors = [];
 		$('.stock-entry.selected', '.active-stocks').each(function(){
 			var stock = $(this).data('symbol');
 			data.push(getStock(stock));
-			colors.push(stockColors[stock] - 1);
+			colors.push(stockColors[stock]);
 		});
 		console.log(data);
 		generateGraph(data, colors);
