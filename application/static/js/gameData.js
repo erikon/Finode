@@ -45,7 +45,7 @@ $(function() {
     }
     if(quantity === totalStock){
         delete portfolio[symbol];
-    } 
+    }
     else {
       portfolio[symbol] -= quantity;
     }
@@ -56,4 +56,12 @@ $(function() {
   function updateTime (interval) {
   	time.setDate(time+interval);
   }
+
+  function display (){
+    document.Write(freeCash);
+    document.Write(portfolioValue);
+    document.Write(time);
+    document.Write(interval);
+  }
+
 });
