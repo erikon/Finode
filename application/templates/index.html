@@ -16,32 +16,19 @@
 
 	<body>
     	<h1 align="center">stockR</h1>
-
-    	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Play Game</button>
-    	<div id="myModal" class="modal fade" role="dialog">
-  			<div class="modal-dialog">
-			    <div class="modal-content">
-     				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal">&times;</button>
-        				<h4 class="modal-title">Play stockR!</h4>
-      				</div>
-      				<div class="modal-body">
-      					<form>
-      						<select id="sectors"></select>
-        					<ul>
-        						<li>Select a sector to trade in above.</li>
-        						<li>Buy and sell as you wish.</li>
-        						<li>Click 'advance' to move forward in time.</li>
-        						<li>Reach the year 2015 to see how you've fared.</li>
-        					</ul>
-						</form>
-					</div>
-      				<div class="modal-footer">
-        				<a href="/game"><button type="button" class="btn btn-default">Play!</button></a>
-      				</div>
-      			</div>
-  			</div>
-		</div>
+    	<div align="center">
+    	 	<button id="play" type="button" class="btn btn-default" data-toggle="modal" data-target="#playModal">Play Game</button>
+    	</div>
+    	<div class="panel hide" id="collapse">
+    		<div class="panel-body">
+    			<div class="btn-group" role="group" aria-label="...">
+    				<button type="button" class="btn btn-default">Buy</button>
+    				<button type="button" class="btn btn-default">Sell</button>
+    			</div>
+    			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#portfolioModal">View Portfolio</button>
+    			<button type="button" class="btn btn-default">Next Turn</button>
+    		</div>
+    	</div>
 
     	<div class="display">
 				<div class="mid-panel col-xs-12">
@@ -66,6 +53,49 @@
 				</div>
 			</div>
 		</div>
+
+    	<div id="playModal" class="modal fade" role="dialog">
+  			<div class="modal-dialog">
+			    <div class="modal-content">
+     				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title">Play stockR!</h4>
+      				</div>
+      				<div class="modal-body">
+      					<form>
+      						<select id="sectors"></select>
+        					<ul>
+        						<li>Select a sector to trade in above.</li>
+        						<li>Buy and sell as you wish.</li>
+        						<li>Click 'advance' to move forward in time.</li>
+        						<li>Reach the year 2015 to see how you've fared.</li>
+        					</ul>
+						</form>
+					</div>
+      				<div class="modal-footer">
+        				<button id="uniqueID" type="button" class="btn btn-default btn-start-game" data-dismiss="modal">Play!</button>
+      				</div>
+      			</div>
+  			</div>
+		</div>
+
+		<div id="portfolioModal" class="modal fade" role="dialog" data-backdrop="false">
+  			<div class="modal-dialog">
+			    <div class="modal-content">
+     				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title" align="center">Your Portfolio</h4>
+      				</div>
+      				<div class="modal-body">
+      					<p>YOUR PORTFOLIO DATA PLEASE ADD ERIC???</p>
+					</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      				</div>
+      			</div>
+  			</div>
+		</div>
+
   </body>
  
  	<script type="text/javascript" src="static/js/visualize.js"></script>
