@@ -53,12 +53,12 @@ $(function() {
     freeCash += cost;
   }
 
-  function updateTime () {
+  updateTime = function() {
   	time.setDate(time + interval);
     $('.current-date').html(time.getMonth()+1+'/'+time.getDate()+'/'+time.getFullYear());
   }
 
-  function updateDisplay (){
+  updateDisplay = function() {
     console.log(freeCash);
     $('.cash-output').append(freeCash);
     $('.current-date').html(time.getMonth()+1+'/'+time.getDate()+'/'+time.getFullYear());
@@ -69,7 +69,7 @@ $(function() {
   }
   bindActions = function(){
       $('.btn-next-turn').click(function(){
-        
+        updateTime();
       });
   }
 
