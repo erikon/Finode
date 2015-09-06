@@ -6,7 +6,7 @@ $(function(){
 	sectorCount = 0,
 	loadedCount = 0,
 	loaded = {},
-	currentVisible = 0,
+	colorCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	stockColors = {},
 	loadingStocks = 0,
 
@@ -117,23 +117,34 @@ $(function(){
 		$('.stock-entry[data-symbol="'+stock+'"]', '.stocks').removeClass('hide');
 		currentVisible -= 1;
 	}
+	pickNextColor = function(){
+		var maxUses = 1<<30, loc = -1;
+		for(var i = 0; i < colors.length; i++){
+			if(colorCount[i] < maxUses){
+				maxUses = colorCount[i];
+				loc = i;
+			}
+		}
+		colorCount[loc]++;
+		return loc;
+	}
 	addToGraph = function(stock){
 		var obj = $(".stock-entry[data-symbol='"+stock+"']", '.active-stocks');
 		var circle = $('.add-stock', $(obj));
 
 		if(obj.hasClass('selected')){
 			obj.removeClass('selected');
+
 			circle.removeClass('color'+stockColors[stock]);
-			currentVisible -= 1;
 			removeFromGraph(colors[stockColors[stock]]);
 		}
 		else{
 			getStock(stock);
 			obj.addClass('selected');
-			currentVisible += 1;
-			currentVisible %= 15;
-			circle.addClass('color'+currentVisible);
-			stockColors[stock] = currentVisible;
+
+			var nextColor = pickNextColor();
+			circle.addClass('color'+nextColor);
+			stockColors[stock] = nextColor;
 		}
 	}
 	drawGraph = function(){
