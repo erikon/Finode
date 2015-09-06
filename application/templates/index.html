@@ -22,11 +22,11 @@
     	<div class="panel hide" id="collapse">
     		<div class="panel-body">
     			<div class="btn-group" role="group" aria-label="...">
-    				<button type="button" class="btn btn-default">Buy</button>
-    				<button type="button" class="btn btn-default">Sell</button>
+    				<button type="button" class="btn btn-default" onclick="buy()">Buy</button>
+    				<button type="button" class="btn btn-default" onclick="sell()">Sell</button>
     			</div>
     			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#portfolioModal">View Portfolio</button>
-    			<button type="button" class="btn btn-default">Next Turn</button>
+    			<button type="button" class="btn btn-default" onclick="updateTime()">Next Turn</button>
     		</div>
     	</div>
 
@@ -43,7 +43,7 @@
 				</div>
 				<div class="col-xs-3 stocks">
 					<ul class="list-unstyled">
-						
+
 					</ul>
 				</div>
 				<div class="col-xs-3 col-xs-offset-1 active-stocks">
@@ -97,7 +97,7 @@
 		</div>
 
   </body>
- 
+
  	<script type="text/javascript" src="static/js/visualize.js"></script>
 	<script type="text/javascript" src="static/js/interface.js"></script>
 	<script type="text/javascript" src="static/js/gameData.js"></script>
