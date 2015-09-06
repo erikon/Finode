@@ -23,8 +23,8 @@
     		<div class="panel-body">
           <div class="cash-output">Free Cash: </div>
     			<div class="btn-group" role="group" aria-label="...">
-    				<button type="button" class="btn btn-default" onclick="buy()">Buy</button>
-    				<button type="button" class="btn btn-default" onclick="sell()">Sell</button>
+    				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#buyModal">Buy</button>
+    				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#sellModal">Sell</button>
     			</div>
     			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#portfolioModal">View Portfolio</button>
     			<button type="button" class="btn btn-default btn-next-turn">Next Turn</button>
@@ -90,6 +90,42 @@
       				</div>
       				<div class="modal-body">
       					<p>YOUR PORTFOLIO DATA PLEASE ADD ERIC???</p>
+					</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      				</div>
+      			</div>
+  			</div>
+		</div>
+
+		<div id="buyModal" class="modal fade" role="dialog" data-backdrop="false">
+  			<div class="modal-dialog">
+			    <div class="modal-content">
+     				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title" align="center">Buy Stocks</h4>
+      				</div>
+      				<div class="modal-body">
+      					<label>Stock Symbol: <input type="text" id="buy-stock-symbol"></label>
+      					<label># of Shares: <input type="text" id="buy-shares"></label>
+      					<button class="btn btn-default btn-buy">Buy</button>
+					</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      				</div>
+      			</div>
+  			</div>
+		</div>
+
+		<div id="sellModal" class="modal fade" role="dialog" data-backdrop="false">
+  			<div class="modal-dialog">
+			    <div class="modal-content">
+     				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title" align="center">Sell Stocks</h4>
+      				</div>
+      				<div class="modal-body">
+      					
 					</div>
       				<div class="modal-footer">
         				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -25,6 +25,7 @@ function getValue(key){
 }
 
 function buy (symbol, quantity) {
+  quantity = parseInt(quantity);
   var length = Object.keys(portfolio).length;
   var cost = updateValue(length, symbol, quantity);
   if(cost > freeCash){
@@ -80,6 +81,10 @@ bindActions = function(){
   });
   $('.btn-next-turn').click(function(){
     updateTime();
+  });
+
+  $('.btn-buy').click(function() {
+    buy($('#buy-stock-symbol').val(), $('#buy-shares').val())
   });
 }
 
