@@ -87,9 +87,9 @@ var StockGraph = function(data, minDate, maxDate) {
   }
 }
 
-var generateGraph = function(data, colorData) {
+var generateGraph = function(data, colorData, minDate, maxDate) {
   deleteGraph();
-  var g = new StockGraph(data);
+  var g = new StockGraph(data, minDate, maxDate);
   g.draw(colorData);
 }
 
