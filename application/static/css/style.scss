@@ -16,6 +16,8 @@
             border: 1px solid #000; 
            .d3-panel{
                 width: 100%;
+                padding: 50px;
+
             }
         }
     }
@@ -35,16 +37,16 @@
     }
 }
 
+body { font: 12px Arial;}
 path {
     stroke: steelblue;
     stroke-width: 1;
-fill: none;
+    fill: none;
 }
-.axis {
-    path, line {
-        fill: none;
-        stroke: grey;
-        stroke-width: 1;
-        shape-rendering: crispEdges;
-    }
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
 }
