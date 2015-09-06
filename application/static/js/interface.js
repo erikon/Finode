@@ -183,14 +183,7 @@ $(function(){
 		}
 	}
 	bindActions = function(){
-		$('.btn-start-game').click(function(){
-			$('div.panel').removeClass('hide');
-			$('#play').addClass('hide');
-			var category = $('#sectors').val();
-			$('.add-category', '.category-entry[data-category="'+category+'"]').trigger('click');
-			inGame = true;
-			updateDisplay();
-		});
+
 	}
 	getCategories();
 	bindActions();

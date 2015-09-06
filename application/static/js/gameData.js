@@ -68,9 +68,17 @@ function updateDisplay (){
   // document.Write(interval);
 }
 bindActions = function(){
-    $('.btn-next-turn').click(function(){
-      updateTime();
-    });
+  $('.btn-start-game').click(function(){
+    $('div.panel').removeClass('hide');
+    $('#play').addClass('hide');
+    var category = $('#sectors').val();
+    $('.add-category', '.category-entry[data-category="'+category+'"]').trigger('click');
+    inGame = true;
+    updateDisplay();
+  });
+  $('.btn-next-turn').click(function(){
+    updateTime();
+  });
 }
 
 bindActions();
