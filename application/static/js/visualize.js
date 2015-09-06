@@ -41,7 +41,7 @@ var StockGraph = function(data, minDate, maxDate) {
         .attr("viewBox","0 0 " + this.width + " " + this.height)
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("preserveAspectRatio", "xMaxYMax meet"),
+        .attr("preserveAspectRatio", "xMidYMid meet"),
       xRange = d3.time.scale()
         .range([0, this.width])
         .domain([this.minDate, this.maxDate]),
@@ -55,7 +55,10 @@ var StockGraph = function(data, minDate, maxDate) {
         .tickFormat(d3.time.format("%Y")),
       yAxis = d3.svg.axis()
         .scale(yRange)
-        .orient('left');
+        .orient('left')
+        .tickFormat(function(d) {
+          return "$" + d3.format(",.2f")(d);
+        });
 
     vis.append("g")
       .attr("class", "x axis")
